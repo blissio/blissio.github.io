@@ -3,211 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Projects - BlissIO</title>
+    <title>All Projects &mdash; BlissIO</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .stats { color: var(--text-3); font-size: 0.875rem; }
+        .filter { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .filter-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-3);
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(255,107,43,0.06);
+        }
+        /* project cards on this page are anchor tags */
+        .project-card { text-decoration: none; color: inherit; display: block; }
+    </style>
 </head>
 <body>
-    <header>
-        <a href="/index.html" class="back-link">← Back to Home</a>
-        <h1>All Projects</h1>
-    </header>
 
-    <div class="container">
-        <div class="controls">
-            <div class="stats" id="stats">Loading repositories...</div>
-            <div class="filter" id="filter">
-                <button class="active" data-lang="all">All</button>
+    <nav class="navbar scrolled">
+        <div class="nav-inner">
+            <a href="index.html" class="nav-logo">&larr; blissio</a>
+            <div class="nav-links">
+                <a href="index.html#about">About</a>
+                <a href="index.html#projects">Featured</a>
+                <a href="index.html#posts">Posts</a>
+                <a href="index.html#contact" class="nav-cta">Hire Me</a>
             </div>
         </div>
+    </nav>
 
-        <div class="projects-grid" id="projects-grid">
-            <div class="loading">Loading all projects from GitHub...</div>
+    <div style="padding-top: 52px;"></div>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">GitHub</div>
+                <h2>All Projects</h2>
+            </div>
+
+            <div class="controls reveal">
+                <div class="stats" id="stats">Loading...</div>
+                <div class="filter" id="filter">
+                    <button class="filter-btn active" data-lang="all">All</button>
+                </div>
+            </div>
+
+            <div class="projects-grid" id="projects-grid">
+                <div class="projects-loading">Fetching all repositories from GitHub...</div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <footer style="border-top: 1px solid var(--border); padding: 2rem; text-align:center; color: var(--text-3); font-size:0.85rem;">
+        <a href="index.html" style="color:var(--accent);text-decoration:none;">&larr; Back to Portfolio</a>
+    </footer>
 
     <script>
-        // === CONFIGURATION ===
-        const GITHUB_USERNAME = 'blissio'; // Change to your username
+    var GITHUB_USERNAME = 'blissio';
 
-        // Emoji map for languages
-        const languageEmojis = {
-            'JavaScript': '🟨',
-            'Python': '🐍',
-            'HTML': '🌐',
-            'CSS': '🎨',
-            'TypeScript': '💙',
-            'Java': '☕',
-            'C++': '⚡',
-            'C': '🔧',
-            'Ruby': '💎',
-            'Go': '🐹',
-            'Rust': '🦀',
-            'PHP': '🐘',
-            'Swift': '🍎',
-            'Kotlin': '🟣',
-            'Shell': '🐚',
-            'C#': '🟪',
-            'Lua': '🌙',
-            'Dart': '🎯',
-        };
+    var langEmoji = {
+        'JavaScript': '🟨', 'Python': '🐍', 'HTML': '🌐', 'CSS': '🎨',
+        'TypeScript': '💙', 'Java': '☕', 'C++': '⚡', 'C': '🔧',
+        'Ruby': '💎', 'Go': '🐹', 'Rust': '🦀', 'PHP': '🐘',
+        'Swift': '🍎', 'Kotlin': '🟣', 'Shell': '🐚', 'C#': '🟪', 'Lua': '🌙', 'Dart': '🎯'
+    };
 
-        let allRepos = [];
-        let currentFilter = 'all';
+    var allRepos = [];
 
-        // Fetch all repos from GitHub
-        async function loadAllRepos() {
-            const projectsGrid = document.getElementById('projects-grid');
-            const statsEl = document.getElementById('stats');
-            
-            try {
-                // Fetch all pages of repos
-                let page = 1;
-                let repos = [];
-                let hasMore = true;
+    var revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) { e.target.classList.add('in-view'); revealObserver.unobserve(e.target); }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-                while (hasMore) {
-                    const response = await fetch(
-                        `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&page=${page}&sort=updated`
-                    );
-                    
-                    if (!response.ok) {
-                        throw new Error(`GitHub API error: ${response.status}`);
-                    }
+    document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
 
-                    const pageRepos = await response.json();
-                    
+    function loadAllRepos() {
+        var grid = document.getElementById('projects-grid');
+        var stats = document.getElementById('stats');
+
+        var page = 1;
+        var repos = [];
+
+        function fetchPage() {
+            fetch('https://api.github.com/users/' + GITHUB_USERNAME + '/repos?per_page=100&page=' + page + '&sort=updated')
+                .then(function(r) {
+                    if (!r.ok) throw new Error(r.status);
+                    return r.json();
+                })
+                .then(function(pageRepos) {
                     if (pageRepos.length === 0) {
-                        hasMore = false;
+                        allRepos = repos;
+                        stats.textContent = repos.length + ' repositories';
+                        buildFilters(repos);
+                        displayRepos(repos);
                     } else {
                         repos = repos.concat(pageRepos);
                         page++;
+                        fetchPage();
                     }
-                }
-
-                allRepos = repos;
-                
-                // Update stats
-                statsEl.textContent = `${repos.length} repositories found`;
-
-                // Create language filter buttons
-                createLanguageFilters(repos);
-
-                // Display repos
-                displayRepos(repos);
-
-            } catch (error) {
-                console.error('Error loading repos:', error);
-                projectsGrid.innerHTML = `
-                    <div class="error">
-                        <p>Error loading repositories.</p>
-                        <p style="font-size: 0.9rem; margin-top: 1rem;">Make sure the username "${GITHUB_USERNAME}" is correct.</p>
-                    </div>
-                `;
-                statsEl.textContent = 'Error loading repositories';
-            }
-        }
-
-        // Create language filter buttons
-        function createLanguageFilters(repos) {
-            const filterEl = document.getElementById('filter');
-            const languages = new Set();
-            
-            repos.forEach(repo => {
-                if (repo.language) {
-                    languages.add(repo.language);
-                }
-            });
-
-            // Clear existing filters except "All"
-            filterEl.innerHTML = '<button class="active" data-lang="all">All</button>';
-
-            // Add language filters
-            Array.from(languages).sort().forEach(lang => {
-                const btn = document.createElement('button');
-                btn.textContent = lang;
-                btn.dataset.lang = lang;
-                btn.addEventListener('click', () => filterByLanguage(lang));
-                filterEl.appendChild(btn);
-            });
-
-            // Add event listener to "All" button
-            filterEl.querySelector('[data-lang="all"]').addEventListener('click', () => filterByLanguage('all'));
-        }
-
-        // Filter repos by language
-        function filterByLanguage(lang) {
-            currentFilter = lang;
-            
-            // Update active button
-            document.querySelectorAll('.filter button').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-
-            // Filter and display
-            const filtered = lang === 'all' 
-                ? allRepos 
-                : allRepos.filter(repo => repo.language === lang);
-            
-            displayRepos(filtered);
-            
-            // Update stats
-            document.getElementById('stats').textContent = 
-                `${filtered.length} of ${allRepos.length} repositories`;
-        }
-
-        // Display repos in grid
-        function displayRepos(repos) {
-            const projectsGrid = document.getElementById('projects-grid');
-            projectsGrid.innerHTML = '';
-
-            if (repos.length === 0) {
-                projectsGrid.innerHTML = '<div class="loading">No repositories found.</div>';
-                return;
-            }
-
-            repos.forEach(repo => {
-                const card = document.createElement('a');
-                card.className = 'project-card';
-                card.href = repo.html_url;
-                card.target = '_blank';
-                
-                const emoji = languageEmojis[repo.language] || '📦';
-                const language = repo.language || 'Unknown';
-                const description = repo.description || 'No description provided.';
-                
-                // Format dates
-                const updatedDate = new Date(repo.updated_at).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric'
+                })
+                .catch(function() {
+                    grid.innerHTML = '<div class="projects-loading">Couldn\'t load repositories. Check that "' + GITHUB_USERNAME + '" is correct.</div>';
+                    stats.textContent = 'Error';
                 });
-
-                card.innerHTML = `
-                    <div class="project-img">${emoji}</div>
-                    <div class="project-content">
-                        <h3 class="project-title">${repo.name}</h3>
-                        <p class="project-desc">${description}</p>
-                        <div class="project-stats">
-                            <span class="stat">⭐ ${repo.stargazers_count}</span>
-                            <span class="stat">🍴 ${repo.forks_count}</span>
-                            <span class="stat">📅 ${updatedDate}</span>
-                        </div>
-                        <div class="project-tags">
-                            <span class="tag">${language}</span>
-                            ${repo.topics.slice(0, 3).map(topic => 
-                                `<span class="tag">${topic}</span>`
-                            ).join('')}
-                        </div>
-                    </div>
-                `;
-                
-                projectsGrid.appendChild(card);
-            });
         }
 
-        // Load repos on page load
-        document.addEventListener('DOMContentLoaded', loadAllRepos);
+        fetchPage();
+    }
+
+    function buildFilters(repos) {
+        var filterEl = document.getElementById('filter');
+        var langs = [];
+        repos.forEach(function(r) { if (r.language && langs.indexOf(r.language) === -1) langs.push(r.language); });
+        langs.sort();
+        filterEl.innerHTML = '<button class="filter-btn active" data-lang="all" onclick="filterBy(\'all\')">All</button>';
+        langs.forEach(function(lang) {
+            var btn = document.createElement('button');
+            btn.className = 'filter-btn';
+            btn.textContent = lang;
+            btn.setAttribute('data-lang', lang);
+            btn.setAttribute('onclick', 'filterBy(\'' + lang.replace(/'/g, "\\'") + '\')');
+            filterEl.appendChild(btn);
+        });
+    }
+
+    function filterBy(lang) {
+        document.querySelectorAll('.filter-btn').forEach(function(b) {
+            b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+        });
+        var filtered = lang === 'all' ? allRepos : allRepos.filter(function(r) { return r.language === lang; });
+        document.getElementById('stats').textContent = filtered.length + ' of ' + allRepos.length + ' repositories';
+        displayRepos(filtered);
+    }
+
+    function displayRepos(repos) {
+        var grid = document.getElementById('projects-grid');
+        grid.innerHTML = '';
+        if (!repos.length) {
+            grid.innerHTML = '<div class="projects-loading">No repos found.</div>';
+            return;
+        }
+        repos.forEach(function(repo, i) {
+            var card = document.createElement('a');
+            card.className = 'project-card reveal';
+            card.href = repo.html_url;
+            card.target = '_blank';
+            card.rel = 'noopener noreferrer';
+            card.style.transitionDelay = (i % 6 * 0.06) + 's';
+            var emoji = langEmoji[repo.language] || '📦';
+            var lang = repo.language || 'Unknown';
+            var desc = repo.description || 'No description.';
+            var date = new Date(repo.updated_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
+            var topicsHTML = (repo.topics || []).slice(0, 3).map(function(t) {
+                return '<span style="font-size:0.72rem;color:var(--text-3);font-family:\'JetBrains Mono\',monospace;">#' + t + '</span>';
+            }).join('');
+            card.innerHTML =
+                '<div class="project-card-inner">' +
+                    '<div class="project-emoji">' + emoji + '</div>' +
+                    '<div class="project-lang">' + lang + '</div>' +
+                    '<h3>' + repo.name + '</h3>' +
+                    '<p>' + desc + '</p>' +
+                    '<div class="project-meta">' +
+                        '<span>&#11088; ' + repo.stargazers_count + '</span>' +
+                        '<span>&#x1F374; ' + repo.forks_count + '</span>' +
+                        '<span>&#x1F4C5; ' + date + '</span>' +
+                    '</div>' +
+                    '<div style="display:flex;gap:0.4rem;flex-wrap:wrap;">' + topicsHTML + '</div>' +
+                '</div>';
+            grid.appendChild(card);
+            revealObserver.observe(card);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', loadAllRepos);
     </script>
+
 </body>
 </html>

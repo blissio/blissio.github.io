@@ -1,0 +1,26 @@
+[
+  {
+    "id": "001",
+    "title": "Running a Minecraft server inside GitHub Codespaces",
+    "date": "2024-07-12",
+    "tags": ["linux", "networking", "fun"],
+    "image": null,
+    "body": "GitHub Codespaces is supposed to be a cloud dev environment. I used it to host a modded Minecraft 1.16.5 server. With a bit of Java, Ngrok tunneling, port forwarding, and some DNS wizardry — it worked. Friends joined. It actually ran. They've since patched it but for a moment it was perfect."
+  },
+  {
+    "id": "002",
+    "title": "Volleyball tracker: what I learned building a 6D Kalman filter",
+    "date": "2025-03-01",
+    "tags": ["python", "computer-vision", "project"],
+    "image": null,
+    "body": "Most tracking tutorials use a 4D Kalman filter — position and velocity. I wanted to track acceleration too because a volleyball in flight is under gravity, and gravity is constant. Adding those two state dimensions makes the predictions way smoother during occlusion. The hard part wasn't the math, it was fusing three independent detectors (color, shape, motion) into a single confident detection without tanking FPS."
+  },
+  {
+    "id": "003",
+    "title": "Why I still use Arch in 2025",
+    "date": "2025-10-01",
+    "tags": ["linux", "arch", "opinion"],
+    "image": null,
+    "body": "Everyone asks why I bother. The honest answer: I learn more fixing a broken Arch install at 2AM than I do in a week of coursework. When pacman breaks something or a kernel update kills my display manager, I have to understand what actually happened. That's the whole point. Also the AUR is genuinely unmatched."
+  }
+]

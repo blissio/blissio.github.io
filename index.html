@@ -3,245 +3,479 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BlissIO - Portfolio & Updates</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Rayane — BlissIO</title>
     <link rel="icon" type="image/x-icon" href="icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>BlissIO</h1>
-        <p class="tagline">Builder. Tinkerer. Maker of Things.</p>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#updates">Updates</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
 
-    <div class="container">
-        <section id="about">
-            <h2>About Me</h2>
-            <div class="about-grid">
-                <div class="profile-pic"><img src="wallhaven-3.jpg" alt=""></div>
-                <div class="bio">
-                    
-                    <p align="left"><b><samp>🔴 🟡 🟢</samp></b></p>
-                <br>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">blissio</a>
+            <div class="nav-links" id="navLinks">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#posts">Posts</a>
+                <a href="#contact" class="nav-cta">Hire Me</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
 
-                    <h1 align="center">Hi, I’m Rayane aka <code>blissio</code> 🐧</h1>
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <div class="hero-glow"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-eyebrow reveal">Available for hire &middot; Spring 2026</div>
+            <h1 class="hero-title reveal delay-1">
+                <span class="line">Rayane.</span>
+                <span class="line dim">Cybersecurity &amp;</span>
+                <span class="line dim">Data Science.</span>
+            </h1>
+            <p class="hero-sub reveal delay-2">
+                I break things ethically, write scripts, and automate my Linux life.<br>
+                Student @ Duquesne University. Builder of things that shouldn't exist.
+            </p>
+            <div class="hero-actions reveal delay-3">
+                <a href="#projects" class="btn-primary">See My Work</a>
+                <a href="mailto:blissio@protonmail.com" class="btn-ghost">Get In Touch</a>
+            </div>
+        </div>
+        <div class="hero-scroll-hint reveal delay-4">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
 
-                    <p align="center">
-                    <samp>
-                        Cybersecurity & Data Science student @ Duquesne University<br>
-                        I break things (ethically), write scripts, and automate my Linux life.<br>
-                        C++ + R + Bash | HomeLabs | Threat Modeling | Ricing Void at 3AM
-                    </samp>
-                    </p>
+    <!-- About -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="about-layout">
+                <div class="about-image-wrap reveal-left">
+                    <div class="about-img-frame">
+                        <img src="wallhaven-3.jpg" alt="Rayane" class="about-img">
+                        <div class="img-border"></div>
+                    </div>
+                    <div class="about-badge">
+                        <span class="badge-dot"></span>
+                        <span>Open to opportunities</span>
+                    </div>
+                </div>
+                <div class="about-text reveal-right">
+                    <div class="section-label">About Me</div>
+                    <h2>Hi, I'm Rayane<br><span class="accent">aka blissio</span></h2>
+                    <p>Cybersecurity &amp; Data Science student at Duquesne University. I'm interested in the intersection of systems security, data pipelines, and making machines do things they weren't designed to do.</p>
+                    <p>My stack: <code>C++</code> &middot; <code>R</code> &middot; <code>Bash</code> &middot; <code>Python</code>. My habitat: a riced Void Linux install, a homelab, and whatever's broken at 3AM.</p>
+                    <div class="about-chips">
+                        <span class="chip">Threat Modeling</span>
+                        <span class="chip">HomeLab</span>
+                        <span class="chip">Linux</span>
+                        <span class="chip">Data Science</span>
+                        <span class="chip">CTF</span>
+                        <span class="chip">Automation</span>
+                    </div>
+                    <a href="mailto:blissio@protonmail.com" class="btn-primary" style="margin-top:2rem;display:inline-block;">Let's Talk &rarr;</a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="projects">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                <h2 style="margin-bottom: 0;">Featured Projects</h2>
-                <a href="projects.html" style="color: var(--accent); text-decoration: none; padding: 0.5rem 1rem; border: 1px solid var(--accent); border-radius: 4px; transition: all 0.3s ease;">View All Projects →</a>
+    <!-- Skills -->
+    <section class="section section-dark" id="skills">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">What I Know</div>
+                <h2>Skills &amp; Tools</h2>
             </div>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-img">📦</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Project Name One</h3>
-                        <p class="project-desc">
-                            Brief description of what this project does and why it's cool. Keep it short and sweet.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">HTML</span>
-                            <span class="tag">CSS</span>
-                            <span class="tag">JavaScript</span>
-                        </div>
-                    </div>
+            <div class="skills-grid">
+                <div class="skill-block reveal" onclick="openSkill('cybersecurity')" role="button" tabindex="0">
+                    <div class="skill-icon">&#x1F510;</div>
+                    <h3>Cybersecurity</h3>
+                    <p>Threat modeling, vulnerability assessment, ethical hacking, CTF competitions, network security fundamentals.</p>
+                    <span class="skill-more">Learn more &rarr;</span>
                 </div>
-
-                <div class="project-card">
-                    <div class="project-img">🎨</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Project Name Two</h3>
-                        <p class="project-desc">
-                            Another project you're working on or have completed. Add images later by replacing the emoji.
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">Data</span>
-                        </div>
-                    </div>
+                <div class="skill-block reveal delay-1" onclick="openSkill('datascience')" role="button" tabindex="0">
+                    <div class="skill-icon">&#x1F4CA;</div>
+                    <h3>Data Science</h3>
+                    <p>R, Python, statistical modeling, computer vision, Kalman filtering, data pipelines and visualization.</p>
+                    <span class="skill-more">Learn more &rarr;</span>
                 </div>
-
-                <div class="project-card">
-                    <div class="project-img">⚡</div>
-                    <div class="project-content">
-                        <h3 class="project-title">Project Name Three</h3>
-                        <p class="project-desc">
-                            Your third project. You can add as many of these as you want - just copy and paste!
-                        </p>
-                        <div class="project-tags">
-                            <span class="tag">Hardware</span>
-                            <span class="tag">IoT</span>
-                        </div>
-                    </div>
+                <div class="skill-block reveal delay-2" onclick="openSkill('linux')" role="button" tabindex="0">
+                    <div class="skill-icon">&#x1F427;</div>
+                    <h3>Linux &amp; Systems</h3>
+                    <p>Arch, Void, NixOS. Shell scripting, ricing, homelab infrastructure, automation, kernel-level debugging.</p>
+                    <span class="skill-more">Learn more &rarr;</span>
+                </div>
+                <div class="skill-block reveal delay-3" onclick="openSkill('dev')" role="button" tabindex="0">
+                    <div class="skill-icon">&#x26A1;</div>
+                    <h3>Development</h3>
+                    <p>C++, Bash, Python, R. From POSIX shell scripting to game dev in Unity 6 to low-level systems work.</p>
+                    <span class="skill-more">Learn more &rarr;</span>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="updates">
-            <h2>Recent Updates</h2>
-            <div class="updates">
-                <div class="update-item">
-                    <div class="update-date">October 2025</div>
-                    <div class="update-text">
-                        🚀 Launched this new portfolio site! Still tinkering with the design but wanted to get something up.
-                    </div>
-                </div>
-                <div class="update-item">
-                    <div class="update-date">September 2025</div>
-                    <div class="update-text">
-                        Working on a new 3d video game project involving Unity 6. It's been challenging but fun - more details coming soon.
-                    </div>
-                </div>
-                <div class="update-item">
-                    <div class="update-date">August 2025</div>
-                    <div class="update-text">
-                        Finished up arch shell . Learned a ton about posix sheel and bash. Check it out in the projects section.
-                    </div>
-                </div>
+    <!-- Projects -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">What I've Built</div>
+                <h2>Projects</h2>
+                <a href="projects.html" class="view-all">View All on GitHub &rarr;</a>
             </div>
-        </section>
+            <div class="projects-grid" id="projects-grid">
+                <div class="projects-loading">Fetching repos...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Posts -->
+    <section class="section section-dark" id="posts">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-label">Writing &amp; Thoughts</div>
+                <h2>Posts</h2>
+            </div>
+            <div class="posts-list" id="posts-list">
+                <div class="posts-loading">Loading posts...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skill Modal -->
+    <div class="post-modal" id="skillModal">
+        <div class="modal-backdrop" id="skillModalBackdrop"></div>
+        <div class="modal-panel">
+            <button class="modal-close" id="skillModalClose">&#x2715;</button>
+            <div class="modal-body" id="skillModalBody"></div>
+        </div>
     </div>
 
-    <footer id="contact">
-        <h2 style="border: none; padding: 0; margin-bottom: 1rem;">Get In Touch</h2>
-        <div class="social-links">
-            <a href="https://github.com/blissio" target="_blank">GitHub</a>
-            <a href="mailto:blissio@protonmail.com">Email</a>
-            <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+    <!-- Post Modal -->
+    <div class="post-modal" id="postModal">
+        <div class="modal-backdrop" id="modalBackdrop"></div>
+        <div class="modal-panel">
+            <button class="modal-close" id="modalClose">&#x2715;</button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Footer / Contact -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-inner reveal">
+                <div class="footer-left">
+                    <h2 class="footer-headline">Let's build something.</h2>
+                    <p>Looking for internships, research roles, or interesting problems to solve. If you're working on something cool, I want to hear about it.</p>
+                    <a href="mailto:blissio@protonmail.com" class="btn-primary" style="margin-top:2rem;display:inline-block;">blissio@protonmail.com</a>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <div class="footer-col-label">Connect</div>
+                        <a href="https://github.com/blissio" target="_blank">GitHub</a>
+                        <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+                        <a href="mailto:blissio@protonmail.com">Email</a>
+                    </div>
+                    <div class="footer-col">
+                        <div class="footer-col-label">Site</div>
+                        <a href="#about">About</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#posts">Posts</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2025 Rayane &mdash; blissio</span>
+                <span>Duquesne University &middot; Pittsburgh, PA</span>
+            </div>
         </div>
     </footer>
 
     <script>
-        // === CONFIGURATION: Add your GitHub repos here ===
-        const githubRepos = [
-            'blissio/Me-And-Them',
-            'blissio/Dotfiles',
-            'blissio/cpp_dev',
-            // Add more repos in 'username/repo' format
-        ];
+    // ==========================================
+    // SCROLL REVEAL
+    // ==========================================
+    var revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+            if (e.isIntersecting) {
+                e.target.classList.add('in-view');
+                revealObserver.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-        // Emoji map for common languages (add more as needed)
-        const languageEmojis = {
-            'JavaScript': '🟨',
-            'Python': '🐍',
-            'HTML': '🌐',
-            'CSS': '🎨',
-            'TypeScript': '💙',
-            'Java': '☕',
-            'C++': '⚡',
-            'C': '🔧',
-            'Ruby': '💎',
-            'Go': '🐹',
-            'Rust': '🦀',
-            'PHP': '🐘',
-            'Swift': '🍎',
-            'Kotlin': '🟣',
-            'Shell': '🐚',
-            'C#': '🟪',
-        };
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(function(el) {
+        revealObserver.observe(el);
+    });
 
-        // Fetch and display GitHub repos
-        async function loadGitHubProjects() {
-            const projectsGrid = document.querySelector('.projects-grid');
-            projectsGrid.innerHTML = '<p style="color: var(--text-dim); grid-column: 1/-1; text-align: center;">Loading projects...</p>';
+    // ==========================================
+    // NAVBAR
+    // ==========================================
+    var navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+        navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
 
-            try {
-                const repos = await Promise.all(
-                    githubRepos.map(repo => 
-                        fetch(`https://api.github.com/repos/${repo}`)
-                            .then(r => r.json())
-                    )
-                );
+    document.getElementById('navToggle').addEventListener('click', function() {
+        document.getElementById('navLinks').classList.toggle('open');
+        this.classList.toggle('active');
+    });
 
-                projectsGrid.innerHTML = '';
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+            var target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                document.getElementById('navLinks').classList.remove('open');
+            }
+        });
+    });
 
-                repos.forEach(repo => {
-                    if (repo.message === 'Not Found') {
-                        console.error(`Repo not found: ${repo.url}`);
-                        return;
-                    }
+    // ==========================================
+    // GITHUB PROJECTS
+    // ==========================================
+    var githubRepos = [
+        'blissio/Me-And-Them',
+        'blissio/Dotfiles',
+        'blissio/cpp_dev'
+    ];
 
-                    const card = document.createElement('div');
-                    card.className = 'project-card';
-                    
-                    const emoji = languageEmojis[repo.language] || '📦';
-                    const topics = repo.topics || [];
-                    const language = repo.language || 'Code';
-                    
-                    card.innerHTML = `
-                        <div class="project-img">${emoji}</div>
-                        <div class="project-content">
-                            <h3 class="project-title">${repo.name.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h3>
-                            <p class="project-desc">
-                                ${repo.description || 'A cool project I\'m working on.'}
-                            </p>
-                            <div class="project-tags">
-                                <span class="tag">${language}</span>
-                                ${topics.slice(0, 3).map(topic => `<span class="tag">${topic}</span>`).join('')}
-                            </div>
-                            <a href="${repo.html_url}" target="_blank" style="display: inline-block; margin-top: 1rem; color: var(--accent); text-decoration: none;">View on GitHub →</a>
-                        </div>
-                    `;
-                    
-                    projectsGrid.appendChild(card);
-                });
+    var langEmoji = {
+        'JavaScript': '🟨', 'Python': '🐍', 'HTML': '🌐', 'CSS': '🎨',
+        'TypeScript': '💙', 'Java': '☕', 'C++': '⚡', 'C': '🔧',
+        'Ruby': '💎', 'Go': '🐹', 'Rust': '🦀', 'PHP': '🐘',
+        'Swift': '🍎', 'Kotlin': '🟣', 'Shell': '🐚', 'C#': '🟪', 'Lua': '🌙'
+    };
 
-                // If no repos loaded, show message
-                if (projectsGrid.children.length === 0) {
-                    projectsGrid.innerHTML = '<p style="color: var(--text-dim); grid-column: 1/-1; text-align: center;">No projects found. Add your GitHub repos in the script!</p>';
-                }
+    function loadProjects() {
+        var grid = document.getElementById('projects-grid');
+        Promise.all(
+            githubRepos.map(function(r) {
+                return fetch('https://api.github.com/repos/' + r).then(function(x) { return x.json(); });
+            })
+        ).then(function(repos) {
+            grid.innerHTML = '';
+            var count = 0;
+            repos.forEach(function(repo, i) {
+                if (repo.message === 'Not Found') return;
+                var card = document.createElement('a');
+                card.className = 'project-card reveal delay-' + (i % 4);
+                card.href = repo.html_url;
+                card.target = '_blank';
+                card.rel = 'noopener noreferrer';
+                var emoji = langEmoji[repo.language] || '📦';
+                var lang = repo.language || 'Code';
+                var desc = repo.description || "A project I'm working on.";
+                card.innerHTML =
+                    '<div class="project-card-inner">' +
+                        '<div class="project-emoji">' + emoji + '</div>' +
+                        '<div class="project-lang">' + lang + '</div>' +
+                        '<h3>' + repo.name.replace(/-/g, ' ').replace(/\b\w/g, function(l) { return l.toUpperCase(); }) + '</h3>' +
+                        '<p>' + desc + '</p>' +
+                        '<div class="project-meta">' +
+                            '<span>&#11088; ' + repo.stargazers_count + '</span>' +
+                            '<span>&#x1F374; ' + repo.forks_count + '</span>' +
+                        '</div>' +
+                        '<span class="project-link">View on GitHub &rarr;</span>' +
+                    '</div>';
+                grid.appendChild(card);
+                revealObserver.observe(card);
+                count++;
+            });
+            if (count === 0) {
+                grid.innerHTML = '<p class="projects-loading">Add your repos in the script config.</p>';
+            }
+        }).catch(function() {
+            grid.innerHTML = '<p class="projects-loading">Couldn\'t load repos right now.</p>';
+        });
+    }
 
-            } catch (error) {
-                console.error('Error loading GitHub repos:', error);
-                projectsGrid.innerHTML = '<p style="color: var(--text-dim); grid-column: 1/-1; text-align: center;">Error loading projects. Check console for details.</p>';
+    // ==========================================
+    // POSTS
+    // ==========================================
+    function loadPosts() {
+        var list = document.getElementById('posts-list');
+        fetch('posts.json').then(function(r) { return r.json(); }).then(function(posts) {
+            list.innerHTML = '';
+            var sorted = posts.slice().reverse();
+            sorted.forEach(function(post, i) {
+                var item = document.createElement('div');
+                item.className = 'post-item reveal delay-' + (i % 3);
+                var date = new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                var thumbHTML = post.image ? '<div class="post-thumb"><img src="' + post.image + '" alt="' + post.title + '" loading="lazy"></div>' : '';
+                var tagsHTML = post.tags.map(function(t) { return '<span class="post-tag">#' + t + '</span>'; }).join('');
+                var excerpt = post.body.slice(0, 140) + '\u2026';
+                item.innerHTML =
+                    '<div class="post-item-inner clickable-card" onclick="openPost(\'' + post.id + '\')">' +
+                        thumbHTML +
+                        '<div class="post-text">' +
+                            '<div class="post-meta">' +
+                                '<span class="post-date">' + date + '</span>' +
+                                '<div class="post-tags">' + tagsHTML + '</div>' +
+                            '</div>' +
+                            '<h3 class="post-title">' + post.title + '</h3>' +
+                            '<p class="post-excerpt">' + excerpt + '</p>' +
+                            '<span class="post-read-more">Read more &rarr;</span>' +
+                        '</div>' +
+                    '</div>';
+                list.appendChild(item);
+                revealObserver.observe(item);
+            });
+            window._posts = posts;
+        }).catch(function() {
+            list.innerHTML = '<p class="posts-loading">Couldn\'t load posts. Make sure posts.json is in the same folder.</p>';
+        });
+    }
+
+    function openPost(id) {
+        var posts = window._posts;
+        if (!posts) return;
+        var post = null;
+        for (var i = 0; i < posts.length; i++) { if (posts[i].id === id) { post = posts[i]; break; } }
+        if (!post) return;
+        var date = new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        var imgHTML = post.image ? '<div class="modal-img"><img src="' + post.image + '" alt="' + post.title + '"></div>' : '';
+        var tagsHTML = post.tags.map(function(t) { return '<span class="post-tag">#' + t + '</span>'; }).join('');
+        document.getElementById('modalBody').innerHTML =
+            imgHTML +
+            '<div class="modal-meta"><span class="post-date">' + date + '</span><div class="post-tags">' + tagsHTML + '</div></div>' +
+            '<h2 class="modal-title">' + post.title + '</h2>' +
+            '<div class="modal-content">' + post.body.replace(/\n/g, '<br>') + '</div>';
+        document.getElementById('postModal').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePostModal() {
+        document.getElementById('postModal').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    document.getElementById('modalClose').addEventListener('click', closePostModal);
+    document.getElementById('modalBackdrop').addEventListener('click', closePostModal);
+
+    // ==========================================
+    // SKILL MODALS
+    // ==========================================
+    var skillData = {
+        cybersecurity: {
+            icon: '🔐',
+            title: 'Cybersecurity',
+            summary: 'My primary academic focus and passion. I approach security from a systems-thinking perspective — understanding how things break before learning how to protect them.',
+            tools: ['Wireshark', 'Nmap', 'Metasploit', 'Burp Suite', 'Ghidra', 'OpenVAS'],
+            topics: ['Threat Modeling', 'Network Forensics', 'Ethical Hacking', 'CTF Competitions', 'Vulnerability Assessment', 'OSINT'],
+            note: 'Currently working toward CompTIA Security+ and building out a homelab for hands-on practice with offensive and defensive tooling.',
+            relatedPosts: []
+        },
+        datascience: {
+            icon: '📊',
+            title: 'Data Science',
+            summary: 'I like working at the edge of statistics and engineering — building pipelines that actually run in production, not just in notebooks.',
+            tools: ['Python', 'R', 'NumPy', 'OpenCV', 'Pandas', 'ggplot2'],
+            topics: ['Computer Vision', 'Kalman Filtering', 'Statistical Modeling', 'Data Pipelines', 'Feature Engineering', 'Visualization'],
+            note: 'Built a 6D Kalman filter for real-time volleyball tracking — fusing color, shape, and motion detectors into a single confident detection without killing FPS.',
+            relatedPosts: ['002']
+        },
+        linux: {
+            icon: '🐧',
+            title: 'Linux & Systems',
+            summary: "Linux is where I actually live. I've broken and rebuilt my system enough times that I understand what's happening under the hood.",
+            tools: ['Arch Linux', 'Void Linux', 'Bash', 'systemd', 'tmux', 'Neovim'],
+            topics: ['Shell Scripting', 'Window Manager Ricing', 'Homelab Infra', 'Kernel Debugging', 'POSIX Compliance', 'Automation'],
+            note: 'Daily driving a riced Void Linux setup. The homelab runs several self-hosted services and serves as a testing ground for networking and security experiments.',
+            relatedPosts: ['003']
+        },
+        dev: {
+            icon: '⚡',
+            title: 'Development',
+            summary: 'I build things across the stack — from low-level C++ systems work to scripting glue code to game prototypes in Unity.',
+            tools: ['C++', 'Python', 'Bash', 'R', 'Unity 6', 'Git'],
+            topics: ['Systems Programming', 'Game Development', 'CLI Tooling', 'Automation Scripts', 'Algorithm Design', 'POSIX Shell'],
+            note: 'Currently working on a 3D game in Unity 6 and maintaining a collection of dotfiles and shell utilities on GitHub.',
+            relatedPosts: ['001', '003']
+        }
+    };
+
+    function openSkill(key) {
+        var s = skillData[key];
+        if (!s) return;
+        var relatedHTML = '';
+        if (s.relatedPosts && s.relatedPosts.length && window._posts) {
+            var related = window._posts.filter(function(p) { return s.relatedPosts.indexOf(p.id) !== -1; });
+            if (related.length) {
+                relatedHTML = '<div class="skill-related"><div class="skill-section-label" style="margin-top:1.75rem;">Related Posts</div>' +
+                    related.map(function(p) {
+                        return '<div class="skill-related-post" onclick="closeSkillModal(); setTimeout(function(){ openPost(\'' + p.id + '\'); }, 250);">' +
+                            '<span class="skill-related-title">' + p.title + '</span>' +
+                            '<span class="skill-related-arrow">&rarr;</span>' +
+                        '</div>';
+                    }).join('') + '</div>';
             }
         }
+        var toolsHTML = s.tools.map(function(t) { return '<span class="skill-tag">' + t + '</span>'; }).join('');
+        var topicsHTML = s.topics.map(function(t) { return '<span class="skill-tag skill-tag-dim">' + t + '</span>'; }).join('');
+        document.getElementById('skillModalBody').innerHTML =
+            '<div class="skill-modal-icon">' + s.icon + '</div>' +
+            '<h2 class="modal-title">' + s.title + '</h2>' +
+            '<p class="modal-content" style="margin-bottom:2rem;">' + s.summary + '</p>' +
+            '<div class="skill-section-label">Tools &amp; Tech</div>' +
+            '<div class="skill-tags-row">' + toolsHTML + '</div>' +
+            '<div class="skill-section-label" style="margin-top:1.5rem;">Topics</div>' +
+            '<div class="skill-tags-row">' + topicsHTML + '</div>' +
+            '<div class="skill-note">' + s.note + '</div>' +
+            relatedHTML;
+        document.getElementById('skillModal').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
 
-        // Load projects when page loads
-        document.addEventListener('DOMContentLoaded', loadGitHubProjects);
+    function closeSkillModal() {
+        document.getElementById('skillModal').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    document.getElementById('skillModalClose').addEventListener('click', closeSkillModal);
+    document.getElementById('skillModalBackdrop').addEventListener('click', closeSkillModal);
 
-        // Fun cursor trail effect (optional - remove if you want)
-        let lastTrail = 0;
-        document.addEventListener('mousemove', (e) => {
-            const now = Date.now();
-            if (now - lastTrail > 30) {
-                const trail = document.createElement('div');
-                trail.className = 'cursor-trail';
-                trail.style.left = e.pageX + 'px';
-                trail.style.top = e.pageY + 'px';
-                document.body.appendChild(trail);
-                
-                setTimeout(() => trail.remove(), 500);
-                lastTrail = now;
-            }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { closePostModal(); closeSkillModal(); }
+    });
+
+    document.querySelectorAll('.skill-block[role="button"]').forEach(function(el) {
+        el.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
         });
+    });
 
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
+    // ==========================================
+    // INIT
+    // ==========================================
+    document.addEventListener('DOMContentLoaded', function() {
+        loadProjects();
+        loadPosts();
+    });
+
+    // ==========================================
+    // CURSOR TRAIL
+    // ==========================================
+    var lastTrail = 0;
+    document.addEventListener('mousemove', function(e) {
+        var now = Date.now();
+        if (now - lastTrail > 40) {
+            var trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.left = e.pageX + 'px';
+            trail.style.top = e.pageY + 'px';
+            document.body.appendChild(trail);
+            setTimeout(function() { if (trail.parentNode) trail.parentNode.removeChild(trail); }, 600);
+            lastTrail = now;
+        }
+    });
     </script>
 </body>
 </html>
