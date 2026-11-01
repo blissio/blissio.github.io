@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Lab · blissio</title><meta name="description" content="Play Log Detective: a small security puzzle by Rayane El Yasti."><link rel="icon" href="icon.png"><link rel="stylesheet" href="style.css"><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"><style>
+.lab-heading { font-size:clamp(2.5rem,6vw,4.5rem);letter-spacing:-.04em;line-height:1.1; }
+.lab-heading em { color:var(--accent);font-style:normal; }
+.lab-panel { margin-top:3rem;border:1px solid var(--border-2);border-radius:8px;overflow:hidden;background:var(--bg-card); }
+.lab-toolbar { padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--fjord); }
+.event { display:block;padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);cursor:pointer; }
+.event:hover { background:var(--bg-card-2); }
+.event-line { display:flex;align-items:flex-start;gap:1rem; }
+.event input { accent-color:var(--accent);margin-top:.35rem;flex:none;width:18px;height:18px; }
+.event code { font-family:'JetBrains Mono',monospace;font-size:.78rem;overflow-wrap:anywhere;color:var(--text); }
+.event small { display:block;color:var(--text-2);margin:.4rem 0 0 2.1rem;font-size:.8rem; }
+.verdict { margin:.7rem 0 0 2.1rem;color:var(--fjord);font-size:.85rem; }
+.lab-actions { padding:1.5rem;display:flex;gap:1rem;flex-wrap:wrap; }
+.lab-actions button { font-family:inherit;cursor:pointer;font-size:.9rem; }
+.result { padding:0 1.5rem 1.5rem;color:var(--fjord); }
+.lab-note { color:var(--text-2);font-size:.85rem;margin-top:1.5rem;max-width:700px; }
+</style></head><body class="inner-page"><nav class="navbar scrolled" id="navbar"><div class="nav-inner">
+<a href="index.html" class="nav-logo">bliss<span class="nav-logo-slash">/</span><span class="nav-logo-accent">io</span></a>
+<div class="nav-links" id="navLinks"><a href="index.html#about">about</a><a href="projects.html">projects</a><a href="index.html#experience">experience</a><a href="lab.html">the lab</a><a href="index.html#contact" class="nav-cta">hire me</a></div>
+<button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div></nav>
+<main class="section page-main"><div class="container"><div class="section-label">the lab / experiment 001</div><h1 class="lab-heading">A little curiosity.<br>A little <em>log detective.</em></h1><p class="page-intro">Six events. Three worth investigating. You're watching a fictional Linux server: select the events you'd flag, then check your instincts.</p>
+<div class="lab-panel"><div class="lab-toolbar"><span>~/blissio/lab · synthetic auth feed</span><span id="selection">0 / 6 selected</span></div><form id="game"><div id="events"></div><div class="lab-actions"><button class="btn-primary" type="submit">Check my instincts →</button><button class="btn-ghost" type="button" id="reset">Shuffle &amp; try again</button></div><div class="result" id="result" role="status" aria-live="polite"></div></form></div><p class="lab-note">A toy inspired by logscope. These are invented events with extra context for the puzzle. Real investigations need baselines and corroborating evidence; an unusual event alone doesn't establish a compromise.</p><a href="https://github.com/blissio/logscope" class="btn-ghost" style="margin-top:1.5rem">Explore logscope →</a></div></main><footer class="page-footer"><div class="container"><span>© 2026 Rayane EL YASTI · blissio</span><a href="index.html">Back to portfolio →</a></div></footer>
+<script>document.getElementById('navToggle').addEventListener('click',function(){var open=document.getElementById('navLinks').classList.toggle('open');this.setAttribute('aria-expanded',String(open));});
+const scenarios=[
+{log:'02:14:08 sshd: 185 failed passwords for root from 192.0.2.44 in 60s',context:'No approved access test is scheduled.',flag:true,why:'The concentrated failures targeting root warrant investigation for brute-force activity.'},
+{log:'10:02:11 sshd: Accepted publickey for rayane from 192.0.2.10',context:'Known workstation, expected key, normal working hours.',flag:false,why:'This matches the supplied access baseline. Keep the audit record; no additional flag is needed for this puzzle.'},
+{log:'02:15:21 sshd: Accepted password for root from 192.0.2.44',context:'The same source just generated 185 failures; direct root login is unexpected.',flag:true,why:'A successful root login after concentrated failures is a high-priority event to investigate.'},
+{log:'03:00:00 CRON: backup job started by backup-agent',context:'The nightly job is scheduled for 03:00 and uses its expected account.',flag:false,why:'The time and account match the documented backup schedule.'},
+{log:'14:35:40 sudo: deploy executed /usr/bin/systemctl restart web',context:'An approved release window is active; deploy is authorized for this command.',flag:false,why:'This is consistent with an authorized deployment. Context prevents unnecessary alerts.'},
+{log:'02:18:03 usermod: user guest added to group sudo',context:'No access change is approved; guest should have no administrative permissions.',flag:true,why:'An unexpected administrative privilege change warrants investigation, especially alongside the earlier login.'}
+];
+let round=[];
+function render(){round=scenarios.slice();for(let i=round.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[round[i],round[j]]=[round[j],round[i]];}
+const root=document.getElementById('events');root.replaceChildren();round.forEach((event,i)=>{const label=document.createElement('label');label.className='event';const line=document.createElement('div');line.className='event-line';const box=document.createElement('input');box.type='checkbox';box.name='event';box.value=i;const code=document.createElement('code');code.textContent=event.log;line.append(box,code);const context=document.createElement('small');context.textContent=event.context;label.append(line,context);root.append(label);});document.getElementById('result').textContent='';update();}
+function update(){document.getElementById('selection').textContent=document.querySelectorAll('[name=event]:checked').length+' / 6 selected';}
+document.getElementById('events').addEventListener('change',update);
+document.getElementById('game').addEventListener('submit',function(e){e.preventDefault();let correct=0;document.querySelectorAll('.event').forEach((label,i)=>{const box=label.querySelector('input');const matched=box.checked===round[i].flag;if(matched)correct++;let verdict=label.querySelector('.verdict');if(!verdict){verdict=document.createElement('p');verdict.className='verdict';label.append(verdict);}verdict.textContent=(round[i].flag?'Investigate. ':'Expected activity. ')+round[i].why;box.disabled=true;});document.getElementById('result').textContent=correct+' / 6 decisions matched. '+(correct===6?'Sharp eyes. You caught all three signals without flagging the routine activity.':'Review the context above, then shuffle for another round.');});
+document.getElementById('reset').addEventListener('click',render);render();
+</script></body></html>

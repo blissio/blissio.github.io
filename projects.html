@@ -16,7 +16,7 @@
             gap: 1rem;
             margin-bottom: 2rem;
         }
-        .stats { color: var(--text-3); font-size: 0.875rem; }
+        .stats { color: var(--text-2); font-size: 0.875rem; }
         .filter { display: flex; flex-wrap: wrap; gap: 0.5rem; }
         .filter-btn {
             background: var(--bg-card);
@@ -40,27 +40,20 @@
         .project-card { text-decoration: none; color: inherit; display: block; }
     </style>
 </head>
-<body>
+<body class="inner-page">
 
-    <nav class="navbar scrolled">
-        <div class="nav-inner">
-            <a href="index.html" class="nav-logo">&larr; blissio</a>
-            <div class="nav-links">
-                <a href="index.html#about">About</a>
-                <a href="index.html#projects">Featured</a>
-                <a href="index.html#posts">Posts</a>
-                <a href="index.html#contact" class="nav-cta">Hire Me</a>
-            </div>
-        </div>
-    </nav>
+<nav class="navbar scrolled" id="navbar"><div class="nav-inner">
+<a href="index.html" class="nav-logo">bliss<span class="nav-logo-slash">/</span><span class="nav-logo-accent">io</span></a>
+<div class="nav-links" id="navLinks"><a href="index.html#about">about</a><a href="projects.html">projects</a><a href="index.html#experience">experience</a><a href="lab.html">the lab</a><a href="index.html#contact" class="nav-cta">hire me</a></div>
+<button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button></div></nav>
 
-    <div style="padding-top: 52px;"></div>
 
-    <section class="section">
+
+    <main class="section page-main">
         <div class="container">
             <div class="section-header reveal">
                 <div class="section-label">GitHub</div>
-                <h2>All Projects</h2>
+                <h1>All Projects</h1><p class="page-intro">Security tools, computer vision, low-level experiments, and the occasional creative misuse of infrastructure. Explore my public GitHub repositories.</p>
             </div>
 
             <div class="controls reveal">
@@ -74,13 +67,12 @@
                 <div class="projects-loading">Fetching all repositories from GitHub...</div>
             </div>
         </div>
-    </section>
+    </main>
 
-    <footer style="border-top: 1px solid var(--border); padding: 2rem; text-align:center; color: var(--text-3); font-size:0.85rem;">
-        <a href="index.html" style="color:var(--accent);text-decoration:none;">&larr; Back to Portfolio</a>
-    </footer>
+<footer class="page-footer"><div class="container"><span>© 2026 Rayane EL YASTI · blissio</span><a href="index.html">Back to portfolio →</a></div></footer>
 
     <script>
+document.getElementById('navToggle').addEventListener('click',function(){var open=document.getElementById('navLinks').classList.toggle('open');this.setAttribute('aria-expanded',String(open));});
     var GITHUB_USERNAME = 'blissio';
 
     var langEmoji = {
@@ -126,7 +118,7 @@
                     }
                 })
                 .catch(function() {
-                    grid.innerHTML = '<div class="projects-loading">Couldn\'t load repositories. Check that "' + GITHUB_USERNAME + '" is correct.</div>';
+                    grid.innerHTML = '<div class="projects-loading">GitHub is unavailable or its request limit was reached. <a href="https://github.com/blissio?tab=repositories" style="color:var(--fjord)">Browse repositories on GitHub →</a></div>';
                     stats.textContent = 'Error';
                 });
         }
@@ -159,6 +151,7 @@
         displayRepos(filtered);
     }
 
+    function escapeHTML(value) { return String(value).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
     function displayRepos(repos) {
         var grid = document.getElementById('projects-grid');
         grid.innerHTML = '';
@@ -175,16 +168,16 @@
             card.style.transitionDelay = (i % 6 * 0.06) + 's';
             var emoji = langEmoji[repo.language] || '📦';
             var lang = repo.language || 'Unknown';
-            var desc = repo.description || 'No description.';
+            var desc = escapeHTML(repo.description || 'No description.');
             var date = new Date(repo.updated_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
             var topicsHTML = (repo.topics || []).slice(0, 3).map(function(t) {
-                return '<span style="font-size:0.72rem;color:var(--text-3);font-family:\'JetBrains Mono\',monospace;">#' + t + '</span>';
+                return '<span style="font-size:0.72rem;color:var(--text-3);font-family:\'JetBrains Mono\',monospace;">#' + escapeHTML(t) + '</span>';
             }).join('');
             card.innerHTML =
                 '<div class="project-card-inner">' +
                     '<div class="project-emoji">' + emoji + '</div>' +
                     '<div class="project-lang">' + lang + '</div>' +
-                    '<h3>' + repo.name + '</h3>' +
+                    '<h3>' + escapeHTML(repo.name) + '</h3>' +
                     '<p>' + desc + '</p>' +
                     '<div class="project-meta">' +
                         '<span>&#11088; ' + repo.stargazers_count + '</span>' +
